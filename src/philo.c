@@ -6,26 +6,11 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 18:48:39 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:50:23 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-// void thinking(t_philo *philo)
-// {
-	
-// 	display(philo, "is thinking\n");
-// 	// ft_usleep(5);
-
-
-// }
-// void sleeping(t_philo *philo)
-// {
-	
-// 	display(philo, "is sleeping\n");
-// 	ft_usleep(philo->info->time_to_sleep);
-// }
 
 void eating(t_philo *philo)
 {
@@ -69,11 +54,8 @@ void *routine(void *input)
 	while (philo->info->all_alive == 1)
 	{
 		pthread_create(&t, NULL, check_death, input);
-		// thinking(philo);
 		take_forks(philo);
 		eating(philo);
-		// sleeping(philo);
-		// pthread_join(t, NULL);
 		pthread_detach(t);
 		if (philo->no_of_meals == philo->info->no_of_meals)
 		{

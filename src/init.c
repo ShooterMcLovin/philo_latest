@@ -6,14 +6,12 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:57:38 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 18:29:46 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:50:28 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-/*number_of_philosophers time_to_die time_to_eat time_to_sleep
-[number_of_times_each_philosopher_must_eat]*/
 int init_info(t_info *info, char **av)
 {
 	long int time;
