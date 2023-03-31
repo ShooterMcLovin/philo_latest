@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 16:07:32 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:29:39 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_philo
 typedef struct s_info
 {
 	int no_of_philos;
+	int no_of_fulls;
 	int no_of_meals;
 	long int start_time;
 	int all_alive;
@@ -46,6 +47,7 @@ typedef struct s_info
 	pthread_mutex_t m_pause;
 	pthread_mutex_t m_eat;
 	pthread_mutex_t m_sleep;
+	pthread_mutex_t m_test;
 }	t_info;
 
 /*check input*/

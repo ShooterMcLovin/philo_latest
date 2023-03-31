@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:57:38 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 15:54:51 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:29:46 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int init_info(t_info *info, char **av)
 	pthread_mutex_init(&info->m_pause,NULL);
 	pthread_mutex_init(&info->m_eat,NULL);
 	pthread_mutex_init(&info->m_sleep,NULL);
+	pthread_mutex_init(&info->m_test,NULL);
 	info->no_of_philos = ft_atoi(av[1]);
 	info->time_to_die = ft_atoi(av[2]);
 	info->time_to_eat = ft_atoi(av[3]);
 	info->time_to_sleep = ft_atoi(av[4]);
 	info->all_alive = 1;
-	info->start_time = time;
+	info->no_of_fulls = 0;
+	info->start_time = get_time();
 	if (av[5])
 		info->no_of_meals = ft_atoi(av[5]);
 	info->philo = malloc(sizeof(t_philo) * ft_atoi(av[1]));
