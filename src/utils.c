@@ -6,21 +6,11 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:58:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 15:59:54 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:11:31 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-int ft_atoi(char *s)
-{
-	int i = 0;
-	int res = 0;
-
-	while (s[i])
-		res = (res*10) + (s[i++] - '0');
-	return(res);
-}
 
 long int get_time(void)
 {

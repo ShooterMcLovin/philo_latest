@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:57:38 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 18:50:28 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:11:13 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int init_info(t_info *info, char **av)
 {
-	long int time;
-	time = get_time();
 	pthread_mutex_init(&info->m_display,NULL);
 	pthread_mutex_init(&info->m_pause,NULL);
 	pthread_mutex_init(&info->m_eat,NULL);

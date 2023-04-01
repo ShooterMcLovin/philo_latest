@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/03/31 18:29:39 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:07:34 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ typedef struct s_info
 }	t_info;
 
 /*check input*/
-/*utils*/
+int check_input(int ac, char **av);
 int ft_atoi(char *s);
+/*utils*/
 long int get_time(void);
 void ft_usleep(int ms);
 void display(t_philo *philo, char *str);
