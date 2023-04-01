@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:56:20 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/01 14:17:59 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:29:01 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ void	ft_free(t_info *info)
 int	main(int ac, char **av)
 {
 	t_info	info;
-
-	if (check_input(ac, av))
+	if (ac < 5 || ac > 6)
+		return(ft_quit());
+	if (check_input(av))
+	{
 		if (init_info(&info, av))
 			init_philo(&info);
-	ft_free(&info);
+		ft_free(&info);
+	}	
 }

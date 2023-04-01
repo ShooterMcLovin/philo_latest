@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:02:14 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/01 14:19:17 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:28:09 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ int	ft_quit(void)
 	return (0);
 }
 
-int	check_input(int ac, char **av)
+int	check_input(char **av)
 {
 	int i;
 	int j;
-	if (ac < 5 || ac > 6)
-		return (ft_quit());
 	j = 1;
 	while (av[j] != NULL)
 	{
