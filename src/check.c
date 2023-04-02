@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:02:14 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/01 14:28:09 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/02 13:36:24 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int	ft_quit(void)
 
 int	check_input(char **av)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	j = 1;
 	while (av[j] != NULL)
 	{
