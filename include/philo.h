@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/01 14:28:15 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/02 16:30:39 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+
+//// over_flow input///
 typedef struct s_philo
 {
 	int				no;
@@ -27,7 +29,7 @@ typedef struct s_philo
 	pthread_mutex_t	*other_fork;
 	long int		start_eat;
 	int				no_of_meals;
-	int				state;
+	int				usleep_time;
 	struct s_info	*info;
 }					t_philo;
 
@@ -35,7 +37,7 @@ typedef struct s_info
 {
 	int				no_of_philos;
 	int				no_of_fulls;
-	int				no_of_meals;
+	int				no_of_meals;////
 	long int		start_time;
 	int				all_alive;
 	int				time_to_eat;
@@ -54,9 +56,11 @@ int					check_input(char **av);
 int					ft_atoi(char *s);
 /*utils*/
 int					ft_quit(void);
+int 				min(int time_to_sleep, int time_to_die);
 long int			get_time(void);
-void				ft_usleep(int ms);
+void				ft_usleep(int ms, t_philo *info);
 void				display(t_philo *philo, char *str);
+void	display_stop(t_philo *philo, char *str);
 /*init*/
 int					init_info(t_info *info, char **av);
 int					init_philo(t_info *info);

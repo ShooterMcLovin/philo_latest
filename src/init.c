@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:57:38 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/02 14:36:55 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/02 16:19:19 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_info(t_info *info, char **av)
 	info->time_to_eat = ft_atoi(av[3]);
 	info->time_to_sleep = ft_atoi(av[4]);
 	info->all_alive = 1;
+	info->no_of_meals = -1;
 	info->no_of_fulls = 0;
 	info->start_time = get_time();
 	if (av[5])
@@ -42,6 +43,7 @@ int	init_philo(t_info *info)
 	while (++x < info->no_of_philos)
 	{
 		info->philo[x].info = info;
+		info->philo[x].info->start_time = get_time();
 		info->philo[x].no = x + 1;
 		info->philo[x].start_eat = get_time();
 		info->philo[x].no_of_meals = 0;
