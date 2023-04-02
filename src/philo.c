@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/02 19:05:27 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:12:29 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*routine(void *input)
 	if (philo->no % 2 == 0)
 	{
 		display(philo, "is thinking\n");
-		// ft_usleep(min(philo->info->time_to_eat, philo->info->time_to_die) / 10);
+		ft_usleep(min(philo->info->time_to_eat, philo->info->time_to_die) / 10);
 	}
 	while (philo->info->all_alive == 1)
 	{
