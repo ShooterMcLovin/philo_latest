@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/02 16:30:39 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:34:25 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	pthread_mutex_t	*other_fork;
 	long int		start_eat;
 	int				no_of_meals;
-	int				usleep_time;
+	int				state;/////
 	struct s_info	*info;
 }					t_philo;
 
@@ -56,9 +56,9 @@ int					check_input(char **av);
 int					ft_atoi(char *s);
 /*utils*/
 int					ft_quit(void);
-int 				min(int time_to_sleep, int time_to_die);
+int 				min(int one, int two);
 long int			get_time(void);
-void				ft_usleep(int ms, t_philo *info);
+void				ft_usleep(int ms);
 void				display(t_philo *philo, char *str);
 void	display_stop(t_philo *philo, char *str);
 /*init*/
