@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 03:44:10 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 03:58:10 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*check_death(void *input)
 void	eating(t_philo *philo)
 {
 	display(philo, "is eating*****\n");
-	pthread_mutex_lock(&philo->info->m_eat);
+	pthread_mutex_lock(&(philo->info->m_eat));
 	philo->start_eat = get_time();
 	philo->no_of_meals++;
 	pthread_mutex_unlock(&(philo->info->m_eat));
@@ -50,7 +50,7 @@ void	eating(t_philo *philo)
 
 void	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->own_fork);
+	pthread_mutex_lock(&(philo->own_fork));
 	display(philo, "has taken a fork\n");
 	if (philo->info->no_of_philos == 1)
 	{
@@ -67,10 +67,10 @@ void	*routine(void *input)
 	pthread_t	cd;
 
 	philo = (t_philo *)input;
-	if (philo->no % 2 == 0)
+	if (philo->no % 2 == 0 )
 	{
 		display(philo, "is thinking\n");
-		usleep(1);
+		usleep(10);
 	}
 	while (philo->info->all_alive == 1)
 	{

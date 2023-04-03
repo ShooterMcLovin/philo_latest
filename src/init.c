@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:57:38 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 03:40:10 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 03:50:11 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init_philo(t_info *info)
 		info->philo[x].no = x + 1;
 		info->philo[x].start_eat = get_time();
 		info->philo[x].no_of_meals = 0;
-		pthread_mutex_init(&info->philo[x].own_fork, NULL);
+		pthread_mutex_init(&(info->philo[x].own_fork), NULL);
 		
 		info->philo[x].other_fork = &info->philo[(x + 1) % (info->no_of_philos )].own_fork;
 		if (pthread_create(&info->philo[x].thread, NULL, &routine, &(info->philo[x])) != 0)

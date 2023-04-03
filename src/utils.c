@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:58:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/02 18:34:03 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 04:03:23 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	ft_usleep(int ms)
 	long int	time;
 
 	time = get_time();
-	while (get_time() != time + ms)
-		usleep(10);
+	while (get_time() - time < ms)
+		usleep(5);
 }
