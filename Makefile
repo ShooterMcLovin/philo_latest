@@ -16,7 +16,7 @@ HIDE =
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -pthread  -I. -I./$(INCDIR)
+CFLAGS	=	-Wall -Werror -Wextra -fsanitize=address -pthread  -I. -I./$(INCDIR)
 RM		=	rm -f
 
 # Output file name

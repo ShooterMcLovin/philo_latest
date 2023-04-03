@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 03:42:22 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 03:44:10 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	*check_death(void *input)
 	{
 		pthread_mutex_unlock(&philo->info->m_eat);
 		pthread_mutex_unlock(&philo->info->m_pause);
-		display(philo, "died -_- \n");
-		philo->info->all_alive = 0;
+		display_stop(philo, "died -_- \n");
 		// philo->info->no_of_fulls = philo->info->no_of_philos;
 		
 	}
@@ -83,10 +82,7 @@ void	*routine(void *input)
 		{	
 			pthread_mutex_lock(&philo->info->m_pause);
 			if (++philo->info->no_of_fulls == philo->info->no_of_philos)
-			{
-				display(philo, "Done\n");
-				philo->info->all_alive = 0;
-			}	
+				display_stop(philo, "Done\n");	
 			pthread_mutex_unlock(&philo->info->m_pause);
 			return (0);
 		}
