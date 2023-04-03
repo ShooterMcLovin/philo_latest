@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 15:25:52 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:39:46 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	*check_death(void *input)
 	pthread_mutex_lock(&philo->info->m_eat);
 	if (get_time() > philo->start_eat + (long)philo->info->time_to_die)
 	{
-		display_stop(philo, "died -_- \n");
+		display_stop(philo, "died =======-_-========== \n");
+		// philo->info->all_alive = 0;
 		pthread_mutex_unlock(&philo->info->m_pause);
 		pthread_mutex_unlock(&philo->info->m_eat);
 		// philo->info->no_of_fulls = philo->info->no_of_philos;
@@ -36,18 +37,17 @@ void	*check_death(void *input)
 
 void	eating(t_philo *philo)
 {
-	display(philo, "is eating*****\n");
-	pthread_mutex_lock(&(philo->info->m_eat));
-	philo->start_eat = get_time();
-	philo->no_of_meals++;
-	if (philo->no_of_meals == philo->info->target_no_of_meals)
-		philo->info->no_of_fulls++;	
-	pthread_mutex_lock(&philo->info->m_pause);
-	if (philo->info->no_of_fulls == philo->info->no_of_philos)
+
+	if (++philo->no_of_meals == philo->info->target_no_of_meals && philo->info->target_no_of_meals > 0)
 	{
-		display_stop(philo, "Done\n");	
+		pthread_mutex_lock(&philo->info->m_pause);
+		if (++philo->info->no_of_fulls == philo->info->no_of_philos)
+		{
+			display_stop(philo, "Done\n");	
+			// pthread_mutex_unlock(&philo->info->m_pause);
+		}
+		pthread_mutex_unlock(&philo->info->m_pause);
 	}
-	pthread_mutex_unlock(&philo->info->m_pause);
 	pthread_mutex_unlock(&(philo->info->m_eat));
 	ft_usleep(philo->info->time_to_eat);
 	pthread_mutex_unlock(&(philo->own_fork));
@@ -68,7 +68,10 @@ void	take_forks(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(philo->other_fork);
+	philo->start_eat = get_time();
 	display(philo, "has taken a fork\n");
+	display(philo, "is eating*****\n");
+	pthread_mutex_lock(&(philo->info->m_eat));
 }
 
 void	*routine(void *input)
@@ -79,8 +82,8 @@ void	*routine(void *input)
 	philo = (t_philo *)input;
 	if (philo->no % 2 == 0 )
 	{
+		ft_usleep(philo->info->time_to_eat);
 		display(philo, "is thinking\n");
-		usleep(10);
 	}
 	while (philo->info->all_alive == 1)
 	{

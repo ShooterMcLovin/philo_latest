@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:58:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 15:16:28 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:36:53 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	display_stop(t_philo *philo, char *str)
 	pthread_mutex_lock(&philo->info->m_display);
 	if (philo->info->all_alive == 1)
 	{
+		philo->info->all_alive = 0;
 		printf("%ld %d %s", (get_time() - philo->info->start_time), philo->no,
 			str);
-		philo->info->all_alive = 0;
 	}	
 	pthread_mutex_unlock(&philo->info->m_display);
 }
 
 void	display(t_philo *philo, char *str)
 {
+	
 	pthread_mutex_lock(&philo->info->m_display);
-	if (philo->info->all_alive == 1)
-		printf("%ld %d %s", (get_time() - philo->info->start_time), philo->no,
-			str);
+	if (philo->info->all_alive == 1 )
+		printf("%ld %d %s", (get_time() - philo->info->start_time), philo->no, str);
 	pthread_mutex_unlock(&philo->info->m_display);
 }
 
