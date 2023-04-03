@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:56:20 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/02 14:16:23 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 03:10:23 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main(int ac, char **av)
 	if (check_input(av))
 	{
 		if (init_info(&info, av))
-			init_philo(&info);
+			if (!init_philo(&info))
+				write(1, "patate", 6);
 		ft_free(&info);
 	}
 }
