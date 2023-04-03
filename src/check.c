@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:02:14 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/02 13:36:24 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 04:07:19 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int	ft_atoi(char *s)
 {
-	int	i;
-	int	res;
+	int		i;
+	long	res;
 
 	i = 0;
 	res = 0;
 	while (s[i] != 0)
 		res = (res * 10) + (s[i++] - '0');
-	return (res);
+	if (res < INT_MAX)
+		return (res);
+	else 
+		return(0);
 }
 
 int	is_digit(int c)

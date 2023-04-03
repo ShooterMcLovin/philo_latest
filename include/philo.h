@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 03:06:38 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 04:10:37 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <limits.h>
 
 
-//// over_flow input///
 typedef struct s_philo
 {
 	int				no;
