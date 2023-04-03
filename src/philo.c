@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 03:58:10 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:25:52 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ void	*check_death(void *input)
 
 	philo = (t_philo *)input;
 	ft_usleep(philo->info->time_to_die + 1);
-	pthread_mutex_lock(&philo->info->m_eat);
 	pthread_mutex_lock(&philo->info->m_pause);
+	pthread_mutex_lock(&philo->info->m_eat);
 	if (get_time() > philo->start_eat + (long)philo->info->time_to_die)
 	{
-		pthread_mutex_unlock(&philo->info->m_eat);
-		pthread_mutex_unlock(&philo->info->m_pause);
 		display_stop(philo, "died -_- \n");
+		pthread_mutex_unlock(&philo->info->m_pause);
+		pthread_mutex_unlock(&philo->info->m_eat);
 		// philo->info->no_of_fulls = philo->info->no_of_philos;
+		return (NULL);
 		
 	}
-	pthread_mutex_unlock(&philo->info->m_eat);
 	pthread_mutex_unlock(&philo->info->m_pause);
-	return (0);
+	pthread_mutex_unlock(&philo->info->m_eat);
+	return (NULL);
 }
 
 void	eating(t_philo *philo)
@@ -39,10 +40,19 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&(philo->info->m_eat));
 	philo->start_eat = get_time();
 	philo->no_of_meals++;
+	if (philo->no_of_meals == philo->info->target_no_of_meals)
+		philo->info->no_of_fulls++;	
+	pthread_mutex_lock(&philo->info->m_pause);
+	if (philo->info->no_of_fulls == philo->info->no_of_philos)
+	{
+		display_stop(philo, "Done\n");	
+	}
+	pthread_mutex_unlock(&philo->info->m_pause);
 	pthread_mutex_unlock(&(philo->info->m_eat));
 	ft_usleep(philo->info->time_to_eat);
-	pthread_mutex_unlock(philo->other_fork);
 	pthread_mutex_unlock(&(philo->own_fork));
+	pthread_mutex_unlock(philo->other_fork);
+
 	display(philo, "is sleeping\n");
 	ft_usleep(philo->info->time_to_sleep);
 	display(philo, "is thinking\n");
@@ -78,14 +88,7 @@ void	*routine(void *input)
 		take_forks(philo);
 		eating(philo);
 		pthread_detach(cd);
-		if (philo->no_of_meals == philo->info->target_no_of_meals)
-		{	
-			pthread_mutex_lock(&philo->info->m_pause);
-			if (++philo->info->no_of_fulls == philo->info->no_of_philos)
-				display_stop(philo, "Done\n");	
-			pthread_mutex_unlock(&philo->info->m_pause);
-			return (0);
-		}
+		
 	}
 	return (0);
 }

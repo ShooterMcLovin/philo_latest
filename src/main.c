@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:56:20 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 03:10:23 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:59:30 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_free(t_info *info)
 
 	pthread_mutex_destroy(&info->m_display);
 	pthread_mutex_destroy(&info->m_pause);
-	pthread_mutex_destroy(&info->m_sleep);
+
 	pthread_mutex_destroy(&info->m_test);
 	x = -1;
 	while (++x < info->no_of_philos)

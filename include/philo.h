@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 04:10:37 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/03 14:59:24 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_info
 	pthread_mutex_t	m_display;
 	pthread_mutex_t	m_pause;
 	pthread_mutex_t	m_eat;
-	pthread_mutex_t	m_sleep;
+
 	pthread_mutex_t	m_test;
 }					t_info;
 
