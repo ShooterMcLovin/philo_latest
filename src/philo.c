@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/06 10:03:40 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/06 10:34:52 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*check_death(void *input)
 	t_philo	*philo;
 
 	philo = (t_philo *)input;
-	pthread_mutex_lock(&philo->info->die);
 	ft_usleep(philo->info->time_to_die + 1, philo->info);
+	pthread_mutex_lock(&philo->info->die);
 	pthread_mutex_lock(&philo->info->eat);
 	if (get_time() > philo->start_eat + philo->info->time_to_die)
 	{
@@ -56,7 +56,7 @@ void *routine (void *input)
 	{
 		x = pthread_create(&check_pulse, NULL, check_death, input);
 		if (x)
-			printf("Mutex Error: %d\n", x);
+			printf("Check-Death Error %d\n", x);
 
 			
 		x = pthread_mutex_lock(&philo->own_fork);
@@ -96,10 +96,10 @@ void *routine (void *input)
 		if (x)
 			printf("Mutex Error: %d\n", x);
 			
+	
 		ft_usleep(philo->info->time_to_sleep, philo->info);
 		display(philo, "thinking\n");
 		pthread_detach(check_pulse);
-	
 	}
 	return(0);
 }
