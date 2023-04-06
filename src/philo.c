@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 14:28:23 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/06 08:41:35 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:14:43 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@ void	*check_death(void *input)
 	t_philo	*philo;
 
 	philo = (t_philo *)input;
-	ft_usleep(philo->info->time_to_die + 1, philo->info);
 	pthread_mutex_lock(&philo->info->die);
+	ft_usleep(philo->info->time_to_die + 1, philo->info);
 	pthread_mutex_lock(&philo->info->eat);
 	if (get_time() > philo->start_eat + philo->info->time_to_die)
 	{
-		display_stop(philo, "died =======-_-========== \n");
-		pthread_mutex_unlock(&philo->info->die);
-		pthread_mutex_unlock(&philo->info->eat);
+		display_stop(philo, "died (x_x) \n");
 		pthread_mutex_unlock(&philo->own_fork);
-		// philo->info->no_of_fulls = philo->info->no_of_philos;
 		return (NULL);
 		
 	}
@@ -43,10 +40,13 @@ void *routine (void *input)
 	pthread_t check_pulse;
 	philo = (t_philo *)input;
 	if (philo->no % 2 == 0)
-		ft_usleep(philo->info->time_to_eat / 2, philo->info);
+		ft_usleep(60, philo->info);
 	while (philo->info->stop == 0)
 	{
-		pthread_create(&check_pulse, NULL, check_death, input);
+		x = pthread_create(&check_pulse, NULL, check_death, input);
+		if (x)
+			printf("Mutex Error: %d\n", x);
+			
 		x = pthread_mutex_lock(&philo->own_fork);
 		if (x)
 			printf("Mutex Error: %d\n", x);
@@ -73,6 +73,7 @@ void *routine (void *input)
 		ft_usleep(philo->info->time_to_sleep, philo->info);
 		display(philo, "thinking\n");
 		pthread_detach(check_pulse);
+	
 	}
 	return(0);
 }
