@@ -6,11 +6,22 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:02:14 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/03 04:07:19 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/06 08:40:40 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+void ftps_fd(int fd, char *s)
+{
+	if (!s)
+	{
+		ftps_fd(2, "ftps error\n");
+		return;
+	}	
+	while (*s)
+		write(fd, &*s++, 1);
+}
 
 int	ft_atoi(char *s)
 {
@@ -32,9 +43,12 @@ int	is_digit(int c)
 	return (c >= '0' && c <= '9');
 }
 
-int	ft_quit(void)
-{
-	write(2, "error: Invalid Input\n", 21);
+int	ft_quit(char *str)
+{	
+	if (!str)
+		write(2, "error: Invalid Input\n", 21);
+	else
+		ftps_fd(2, str);
 	return (0);
 }
 
@@ -50,14 +64,17 @@ int	check_input(char **av)
 		while (av[j][i])
 		{
 			if (!is_digit(av[j][i]))
-				return (ft_quit());
+				return (ft_quit(NULL));
 			i++;
 		}
 		j++;
 	}
 	j = 1;
 	while (av[j])
-		if (ft_atoi(av[j++]) == 0)
-			return (ft_quit());
+	{
+		if (ft_atoi(av[j]) == 0 || ft_atoi(av[j]) > 1000)
+			return (ft_quit(NULL));
+		j++;
+	}	
 	return (1);
 }
