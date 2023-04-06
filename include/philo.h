@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:51:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/06 08:52:15 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/06 09:40:00 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_philo
 {
 	int no;
 	long 			start_eat;
+	int 			no_meals_eaten;
 	pthread_t thread;
 	pthread_mutex_t own_fork;//r
 	pthread_mutex_t *other_fork;//l
@@ -58,6 +59,7 @@ long				get_time(void);
 void 				ft_usleep(int ms, t_info *info);
 void				display(t_philo *philo, char *str);
 void				display_stop(t_philo *philo, char *str);
+void				display_death(t_philo *philo, char *str);
 /*init*/
 int					init_info(t_info *info, char **av);
 int					init_philo(t_info *info);
