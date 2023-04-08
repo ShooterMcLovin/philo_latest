@@ -6,13 +6,13 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:58:34 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/06 10:22:49 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:11:33 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-long int	get_time(void)
+long long	get_time(void)
 {
 	struct timeval	time;
 
@@ -20,42 +20,26 @@ long int	get_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void ft_usleep(int ms, t_info *info)
+void	ft_usleep(int ms, t_philo *philo)
 {
-	long int time;
-	pthread_mutex_lock(&info->sleep);
+	long	time;
+
+	if (ms < 0)
+		return ;
+	(void)philo;
 	time = get_time();
-	pthread_mutex_unlock(&info->sleep);
-	while (get_time() - time != ms)
+	while (get_time() < (time + ms) && !check_death(philo))
 		usleep(10);
 }
 
-void display(t_philo *philo, char *str)
+void	display(t_philo *philo, char *str)
 {
-	pthread_mutex_lock(&philo->info->display);
-	if (philo->info->stop == 0)
-		printf("%ld %d %s", get_time() - philo->info->start_time, philo->no, str);
-	pthread_mutex_unlock(&philo->info->display);
-}
+	long long	time;
 
-void display_death(t_philo *philo, char *str)
-{
 	pthread_mutex_lock(&philo->info->display);
-	if (philo->info->stop == 0)
-	{
-		philo->info->stop = 1;
-		printf("%ld %d %s", get_time() - philo->info->start_time, philo->no, str);
-	}	
-	pthread_mutex_unlock(&philo->info->display);
-}
-
-void display_stop(t_philo *philo, char *str)
-{
-	pthread_mutex_lock(&philo->info->display);
-	if (philo->info->stop == 0)
-	{
-		philo->info->stop = 1;
-		printf("%s", str);
-	}	
+	time = get_time() - philo->start_time;
+	if (philo->alive == true && philo->full == false
+		&& philo->info->stop == false)
+		printf("%lld %d %s", time, philo->no, str);
 	pthread_mutex_unlock(&philo->info->display);
 }
