@@ -11,7 +11,7 @@ RESET	:= \033[0m
 
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -pthread  -I -I./$(INCDIR)
+CFLAGS = -g -Wall -Werror -Wextra -pthread -fsanitize=thread -I -I./$(INCDIR)
 
 SRCS = 	src/check.c src/init.c src/main.c src/philo.c src/utils.c
 

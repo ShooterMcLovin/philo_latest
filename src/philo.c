@@ -6,7 +6,7 @@
 /*   By: alpicard <alpicard@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 10:59:11 by alpicard          #+#    #+#             */
-/*   Updated: 2023/04/08 10:16:21 by alpicard         ###   ########.fr       */
+/*   Updated: 2023/04/10 12:21:55 by alpicard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ void	*routine(void *in)
 		ft_usleep(philo->sleep_time, philo);
 		display(philo, "is thinking\n");
 		ft_usleep((philo->eat_time - philo->sleep_time), philo);
+		pthread_mutex_lock(&philo->info->pause);
+		if (philo->info->stop == true)
+			philo->alive = false;
+		pthread_mutex_unlock(&philo->info->pause);
 	}
 	return (0);
 }
